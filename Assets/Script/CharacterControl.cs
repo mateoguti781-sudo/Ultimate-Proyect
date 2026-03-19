@@ -10,10 +10,10 @@ public class CharacterControl : MonoBehaviour
     private Rigidbody2D _rb;
     [SerializeField] LayerMask groundCheck;
     [SerializeField]SpriteRenderer sp;
-    [SerializeField] GameObject prefab, prefab2;
+    // [SerializeField] GameObject prefab, prefab2;
     GameObject build_prefab;
-    int step = 0, step2;
-    [SerializeField] GameObject step_block, step_block2, magnet;
+    //int step = 0, step2;
+    //[SerializeField] GameObject step_block, step_block2, magnet;
 
     Vector2 Spawnpoint;
     // Start is called before the first frame update
@@ -43,6 +43,10 @@ public class CharacterControl : MonoBehaviour
         {
             _rb.velocity = new Vector2(_rb.velocity.x, jumpForce);
         }
+        // if(Input.GetKeyDown(KeyCode.D)&& _isGrounded)
+        // {
+
+        // }
         //------------------------------------------------------------------
 
         if(build_prefab)
@@ -69,52 +73,53 @@ public class CharacterControl : MonoBehaviour
             Spawnpoint = collision.transform.position;
             collision.GetComponent<Animator>().SetBool("Active", true);
         }
-        if(collision.tag == "Bloque")
-        {
-            step++;
-            Destroy(collision.gameObject);
+        // if(collision.tag == "Bloque")
+        // {
+        //     step++;
+        //     Destroy(collision.gameObject);
 
-            foreach(Transform child in step_block.transform)
-            {
-                if(!child.gameObject.activeInHierarchy)
-                {
-                    child.gameObject.SetActive(true);
-                    return;
-                }
-            }
-        }
-         if(collision.tag == "Bloque2")
-        {
-            step2++;
-            Destroy(collision.gameObject);
+        //     foreach(Transform child in step_block.transform)
+        //     {
+        //         if(!child.gameObject.activeInHierarchy)
+        //         {
+        //             child.gameObject.SetActive(true);
+        //             return;
+        //         }
+        //     }
+        // }
+        //  if(collision.tag == "Bloque2")
+        // {
+        //     step2++;
+        //     Destroy(collision.gameObject);
 
-            foreach(Transform child in step_block2.transform)
-            {
-                if(!child.gameObject.activeInHierarchy)
-                {
-                    child.gameObject.SetActive(true);
-                    return;
-                }
-            }
-        }
-        if(collision.tag == "Magnet")
-        {
-            magnet.SetActive(true);
-            Destroy(collision.gameObject);
-        }
+        //     foreach(Transform child in step_block2.transform)
+        //     {
+        //         if(!child.gameObject.activeInHierarchy)
+        //         {
+        //             child.gameObject.SetActive(true);
+        //             return;
+        //         }
+        //     }
+        // }
     }
-    public void builtClick()
-    {
-        step--;
-        foreach(Transform child in step_block.transform)
-        {
-            if(child.gameObject.activeInHierarchy)
-            {
-                child.gameObject.SetActive(false);
-                build_prefab = Instantiate(prefab);
-                return;
-            }
-        }
-    }
+    //    if(collision.tag == "Magnet")
+    //     {
+    //         magnet.SetActive(true);
+    //         Destroy(collision.gameObject);
+    //     }
+    // }
+    // public void builtClick()
+    // {
+    //     step--;
+    //     foreach(Transform child in step_block.transform)
+    //     {
+    //         if(child.gameObject.activeInHierarchy)
+    //         {
+    //             child.gameObject.SetActive(false);
+    //             build_prefab = Instantiate(prefab);
+    //             return;
+    //         }
+    //     }
+    // }
 
 }
