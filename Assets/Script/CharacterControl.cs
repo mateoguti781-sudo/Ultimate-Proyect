@@ -37,6 +37,7 @@ public class CharacterControl : MonoBehaviour
             sp.flipX = true;
         }
 
+
         Collider2D col = GetComponent<Collider2D>();
         _isGrounded = Physics2D.OverlapCircle(transform.position - transform.up * ((col.bounds.extents.y / transform.localScale.y - col.offset.y) * transform.localScale.y), 0.01f, groundCheck);
         if (Input.GetKeyDown(KeyCode.Space) && _isGrounded)
