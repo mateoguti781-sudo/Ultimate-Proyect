@@ -9,10 +9,12 @@ public class Enemy : MonoBehaviour
     public void TakeDamage(int damage)
     {
         health -= damage;
-
+        print("la vida del enemigo es: " + health);
         if (health <= 0)
         {
             Destroy(gameObject);
         }
+        
     }
+
 }

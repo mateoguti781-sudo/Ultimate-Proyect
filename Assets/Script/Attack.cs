@@ -8,38 +8,82 @@ public class Attack : MonoBehaviour
     [SerializeField] float attackRange = 0.5f;
     [SerializeField] float strongRange = 0.7f;
     [SerializeField] float areaRange = 1.2f;
-
+    [SerializeField]SpriteRenderer sp;
     [SerializeField] LayerMask enemyLayers;
+    [SerializeField] Enemy enemy;
 
     bool attackMode = false;
+    [SerializeField] float power = 100;
+    [SerializeField] float maxPower = 100;
+    [SerializeField] float rechargeRate = 5;
 
     void Update()
     {
-        // 🔁 Activar / desactivar modo ataque
-        if (Input.GetKeyDown(KeyCode.F))
+        // Activar / desactivar modo ataque
+        if (sp.flipX)
+            attackPoint.localPosition = new Vector2(-0.1f, 0);
+        else
+            attackPoint.localPosition = new Vector2(0.1f, 0);
+        if (Input.GetKeyDown(KeyCode.F) && power >= 20)
         {
             attackMode = !attackMode;
-            Debug.Log("Modo ataque: " + attackMode);
+            print("Modo de ataque :" + attackMode);
+            print("tu poder es:" + power);
+        }
+        else
+        {
+            // RECARGA 
+            power += rechargeRate * Time.deltaTime;
+
+            if (power > maxPower)
+                power = maxPower;
         }
 
-        if (!attackMode) return; // ❗ NO hace nada si no está activo
+        if (!attackMode) return; //  NO hace nada si no está activo
 
-        // ⚔️ Ataque normal
+        // Ataque normal
         if (Input.GetKeyDown(KeyCode.J))
         {
             NormalAttack();
+            power -= 10;
+
+            if (power <= 20)
+            {
+                power = 0;
+                attackMode = false;
+                print("Modo de ataque :" + attackMode);
+            }
+            print("tu poder es:" + power);
         }
 
-        // 💥 Ataque fuerte
-        if (Input.GetKeyDown(KeyCode.K))
+        // Ataque fuerte
+        if (Input.GetKeyDown(KeyCode.K) && power >= 70)
         {
             StrongAttack();
+            power -= 30;
+
+            if (power <= 20)
+            {
+                power = 0;
+                attackMode = false;
+                print("Modo de ataque :" + attackMode);
+            }
+           print("tu poder es:" + power);
         }
 
-        // 🌪️ Ataque en área
+        //  Ataque en área
         if (Input.GetKeyDown(KeyCode.L))
         {
             AreaAttack();
+            power -= 20;
+
+            if (power <= 20)
+            {
+                power = 0;
+                attackMode = false;
+                print("Modo de ataque :" + attackMode);
+            }
+            print("tu poder es:" + power);
         }
     }
 
@@ -53,10 +97,10 @@ public class Attack : MonoBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
-            enemy.GetComponent<Enemy>()?.TakeDamage(1);
+            enemy.GetComponent<Enemy>()?.TakeDamage(10);
         }
 
-        Debug.Log("Ataque normal");
+        print("Ataque normal");
     }
 
     void StrongAttack()
@@ -69,10 +113,10 @@ public class Attack : MonoBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
-            enemy.GetComponent<Enemy>()?.TakeDamage(3);
+            enemy.GetComponent<Enemy>()?.TakeDamage(50);
         }
 
-        Debug.Log("Ataque fuerte");
+        print("Ataque fuerte");
     }
 
     void AreaAttack()
@@ -85,10 +129,10 @@ public class Attack : MonoBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
-            enemy.GetComponent<Enemy>()?.TakeDamage(2);
+            enemy.GetComponent<Enemy>()?.TakeDamage(20);
         }
 
-        Debug.Log("Ataque en área");
+        print("Ataque en área");
     }
 
     void OnDrawGizmosSelected()
