@@ -39,7 +39,7 @@ public class Attack : MonoBehaviour
                 power = maxPower;
         }
 
-        if (!attackMode) return; //  NO hace nada si no está activo
+        if (!attackMode) return; //  NO hace nada si no esta activo
 
         // Ataque normal
         if (Input.GetKeyDown(KeyCode.J))

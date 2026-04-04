@@ -12,9 +12,9 @@ public class CharacterControl : MonoBehaviour
     [SerializeField]SpriteRenderer sp;
     // [SerializeField] GameObject prefab, prefab2;
     GameObject build_prefab;
+    [SerializeField] int Health;
     //int step = 0, step2;
-    //[SerializeField] GameObject step_block, step_block2, magnet;
-
+    //[SerializeField] GameObject step_block, step_block2, magnet
     Vector2 Spawnpoint;
     // Start is called before the first frame update
     void Start()
@@ -122,5 +122,15 @@ public class CharacterControl : MonoBehaviour
     //         }
     //     }
     // }
+    public void Damage(int damage)
+    {
+        Health -= damage;
+        print("tu vida es: " + Health);
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
 
 }
