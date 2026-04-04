@@ -12,9 +12,9 @@ public class CharacterControl : MonoBehaviour
     [SerializeField]SpriteRenderer sp;
     // [SerializeField] GameObject prefab, prefab2;
     GameObject build_prefab;
+    [SerializeField] int Health;
     //int step = 0, step2;
-    //[SerializeField] GameObject step_block, step_block2, magnet;
-
+    //[SerializeField] GameObject step_block, step_block2, magnet
     Vector2 Spawnpoint;
     // Start is called before the first frame update
     void Start()
@@ -36,6 +36,7 @@ public class CharacterControl : MonoBehaviour
         {
             sp.flipX = true;
         }
+
 
         Collider2D col = GetComponent<Collider2D>();
         _isGrounded = Physics2D.OverlapCircle(transform.position - transform.up * ((col.bounds.extents.y / transform.localScale.y - col.offset.y) * transform.localScale.y), 0.01f, groundCheck);
@@ -121,5 +122,15 @@ public class CharacterControl : MonoBehaviour
     //         }
     //     }
     // }
+    public void Damage(int damage)
+    {
+        Health -= damage;
+        print("tu vida es: " + Health);
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+        
+    }
 
 }
