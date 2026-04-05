@@ -9,6 +9,7 @@ public class EnemyMovement : MonoBehaviour
     [SerializeField] float detectionDistance = 5f;
     [SerializeField] Transform attackPoint;
     [SerializeField] SpriteRenderer sp;
+
     // Start is called before the first frame update
     void update()
     {
@@ -33,6 +34,7 @@ public class EnemyMovement : MonoBehaviour
         else
         attackPoint.localPosition = new Vector2(0.7f, 0);
     }
+
 
     // Update is called once per frame
     

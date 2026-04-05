@@ -13,10 +13,11 @@ public class Attack : MonoBehaviour
     [SerializeField] Enemy enemy;
 
     bool attackMode = false;
-    [SerializeField] float power = 100;
+    [SerializeField] float power = 20;
     [SerializeField] float maxPower = 100;
     [SerializeField] float rechargeRate = 5;
-
+    [SerializeField] int Health = 100;
+    bool isBlocking;
     void Update()
     {
         // Activar / desactivar modo ataque
@@ -61,7 +62,6 @@ public class Attack : MonoBehaviour
         {
             StrongAttack();
             power -= 30;
-
             if (power <= 20)
             {
                 power = 0;
@@ -71,12 +71,11 @@ public class Attack : MonoBehaviour
            print("tu poder es:" + power);
         }
 
-        //  Ataque en área
+        //  Ataque en area
         if (Input.GetKeyDown(KeyCode.L))
         {
             AreaAttack();
             power -= 20;
-
             if (power <= 20)
             {
                 power = 0;
@@ -85,8 +84,8 @@ public class Attack : MonoBehaviour
             }
             print("tu poder es:" + power);
         }
+        isBlocking = Input.GetKey(KeyCode.LeftShift);
     }
-
     void NormalAttack()
     {
         Collider2D[] enemies = Physics2D.OverlapCircleAll(
@@ -132,7 +131,24 @@ public class Attack : MonoBehaviour
             enemy.GetComponent<Enemy>()?.TakeDamage(20);
         }
 
-        print("Ataque en área");
+        print("Ataque en area");
+    }
+    public void EnemyDamage(int damage)
+    {
+        print("tu vida es: " + Health);
+        if (isBlocking)
+        {
+            damage -= 10;
+            print("Bloqueaste");
+        }
+
+        Health -= damage;
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
+
+        
     }
 
     void OnDrawGizmosSelected()

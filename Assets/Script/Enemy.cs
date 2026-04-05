@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using System;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] int health = 100;
@@ -9,12 +9,15 @@ public class Enemy : MonoBehaviour
     [SerializeField] float strongRange = 0.7f;
     [SerializeField] LayerMask PlayerLayers;
 
+    public Action OnDeath;
+
     public void TakeDamage(int damage)
     {
         health -= damage;
         print("la vida del enemigo es: " + health);
         if (health <= 0)
         {
+            OnDeath?.Invoke();
             Destroy(gameObject);
         }
         
@@ -25,6 +28,7 @@ public class Enemy : MonoBehaviour
         {
             AttackEnemy();
             print("el enemigo te ataco");
+
         }
     }
     void AttackEnemy()
@@ -37,7 +41,7 @@ public class Enemy : MonoBehaviour
 
         foreach (Collider2D enemy in enemies)
         {
-            enemy.GetComponent<CharacterControl>()?.Damage(50);
+            enemy.GetComponent<Attack>()?.EnemyDamage(20);
         }
     
 
