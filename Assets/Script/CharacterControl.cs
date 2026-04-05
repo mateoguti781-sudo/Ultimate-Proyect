@@ -12,9 +12,9 @@ public class CharacterControl : MonoBehaviour
     [SerializeField]SpriteRenderer sp;
     // [SerializeField] GameObject prefab, prefab2;
     GameObject build_prefab;
-    //int step = 0, step2;
-    //[SerializeField] GameObject step_block, step_block2, magnet;
 
+    //int step = 0, step2;
+    //[SerializeField] GameObject step_block, step_block2, magnet
     Vector2 Spawnpoint;
     // Start is called before the first frame update
     void Start()
@@ -122,5 +122,6 @@ public class CharacterControl : MonoBehaviour
     //         }
     //     }
     // }
+
 
 }
