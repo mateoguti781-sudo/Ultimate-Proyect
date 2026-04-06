@@ -4,11 +4,16 @@ using UnityEngine;
 using System;
 public class Enemy : MonoBehaviour
 {
+    [SerializeField] Transform player;
+    [SerializeField] float speed = 2f;
+    [SerializeField] float detectionRange = 10f;
+    [SerializeField] float attackCooldown = 1f;
     [SerializeField] int health = 100;
-    [SerializeField] Transform attackPoint;
-    [SerializeField] float strongRange = 0.7f;
+    [SerializeField] Transform attackPoint; 
+    [SerializeField] float strongRange = 0.7f; 
     [SerializeField] LayerMask PlayerLayers;
 
+    float lastAttackTime;
     public Action OnDeath;
 
     public void TakeDamage(int damage)
@@ -24,12 +29,45 @@ public class Enemy : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.C))
+        if (player == null) 
         {
-            AttackEnemy();
-            print("el enemigo te ataco");
-
+            print(player);
+            return;
         }
+
+        float distance = Vector2.Distance(transform.position, player.position);
+
+        // Detecta al jugador
+        if (distance <= detectionRange)
+        {
+            // Persigue si esta lejos
+            if (distance > strongRange)
+            {
+                transform.position = Vector2.MoveTowards(
+                    transform.position,
+                    player.position,
+                    speed * Time.deltaTime
+                );
+            }
+            else
+            {
+                // Ataca automaticamente
+                if (Time.time >= lastAttackTime + attackCooldown)
+                {
+                    AttackEnemy();
+                    lastAttackTime = Time.time;
+                }
+            }
+        }
+
+        Flip();
+    }
+    void Flip()
+    {
+        if (player.position.x > transform.position.x)
+            transform.localScale = new Vector2(1, 1);
+        else
+            transform.localScale = new Vector2(-1, 1);
     }
     void AttackEnemy()
     {
@@ -46,6 +84,15 @@ public class Enemy : MonoBehaviour
     
 
         print("Ataque fuerte");
+    }
+    public int GetHealth()
+    {
+        return health;
+    }
+
+    public void ResetHealth()
+    {
+        health = 100;
     }
         
     
