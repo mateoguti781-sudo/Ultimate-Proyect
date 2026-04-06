@@ -17,7 +17,6 @@ public class Attack : MonoBehaviour
     [SerializeField] float maxPower = 100;
     [SerializeField] float rechargeRate = 5;
     [SerializeField] int Health = 100;
-    bool isBlocking;
     void Update()
     {
         // Activar / desactivar modo ataque
@@ -84,7 +83,7 @@ public class Attack : MonoBehaviour
             }
             print("tu poder es:" + power);
         }
-        isBlocking = Input.GetKey(KeyCode.LeftShift);
+        
     }
     void NormalAttack()
     {
@@ -135,14 +134,9 @@ public class Attack : MonoBehaviour
     }
     public void EnemyDamage(int damage)
     {
-        print("tu vida es: " + Health);
-        if (isBlocking)
-        {
-            damage -= 10;
-            print("Bloqueaste");
-        }
 
         Health -= damage;
+        print("Tu vida es:"+ Health);
         if (Health <= 0)
         {
             Destroy(gameObject);
@@ -163,5 +157,14 @@ public class Attack : MonoBehaviour
 
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, areaRange);
+    }
+    public int GetHealth()
+    {
+        return Health;
+    }
+
+    public void ResetHealth()
+    {
+        Health = 100;
     }
 }

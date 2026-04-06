@@ -63,17 +63,17 @@ public class CharacterControl : MonoBehaviour
         }
 
     }
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if(collision.gameObject.CompareTag("DeadPoint"))
-        {
-            transform.position = Spawnpoint;
-        }
-        if(collision.tag == "CheckPoint")
-        {
-            Spawnpoint = collision.transform.position;
-            collision.GetComponent<Animator>().SetBool("Active", true);
-        }
+    // private void OnTriggerEnter2D(Collider2D collision)
+    // {
+    //     if(collision.gameObject.CompareTag("DeadPoint"))
+    //     {
+    //         transform.position = Spawnpoint;
+    //     }
+    //     if(collision.tag == "CheckPoint")
+    //     {
+    //         Spawnpoint = collision.transform.position;
+    //         collision.GetComponent<Animator>().SetBool("Active", true);
+    //     }
         // if(collision.tag == "Bloque")
         // {
         //     step++;
@@ -102,7 +102,7 @@ public class CharacterControl : MonoBehaviour
         //         }
         //     }
         // }
-    }
+    // }
     //    if(collision.tag == "Magnet")
     //     {
     //         magnet.SetActive(true);

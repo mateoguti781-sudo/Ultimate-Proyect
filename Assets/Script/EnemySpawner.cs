@@ -4,31 +4,39 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Configuracion")]
+    [Header("Configuración")]
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform[] spawnPoints;
 
-    [Header("Control")]
-    [SerializeField] float spawnDelay = 2f;
-    [SerializeField] int maxEnemies = 3;
-
-    int currentEnemies = 0;
+    [Header("Rondas")]
+    [SerializeField] int baseEnemies = 2; // enemigos en ronda 1
+    int currentRound = 1;
+    int enemiesToSpawn;
+    int currentEnemiesAlive = 0;
 
     void Start()
     {
-        StartCoroutine(SpawnEnemies());
+        StartRound();
     }
 
-    IEnumerator SpawnEnemies()
+    // INICIAR RONDA
+    public void StartRound()
     {
-        while (true)
-        {
-            if (currentEnemies < maxEnemies)
-            {
-                Spawn();
-            }
+        enemiesToSpawn = baseEnemies + currentRound; // cada ronda aumenta
+        currentEnemiesAlive = enemiesToSpawn;
 
-            yield return new WaitForSeconds(spawnDelay);
+        print("RONDA " + currentRound + " - Enemigos: " + enemiesToSpawn);
+
+        StartCoroutine(SpawnWave());
+    }
+
+    // SPAWN DE LA RONDA
+    IEnumerator SpawnWave()
+    {
+        for (int i = 0; i < enemiesToSpawn; i++)
+        {
+            Spawn();
+            yield return new WaitForSeconds(0.5f); // pequeño delay entre enemigos
         }
     }
 
@@ -38,14 +46,23 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
 
-        currentEnemies++;
-
-        // Cuando el enemigo muera → restar contador
-        enemy.GetComponent<Enemy>().OnDeath += EnemyDied;
+        // SUSCRIBIRSE A LA MUERTE
+        Enemy enemyScript = enemy.GetComponent<Enemy>();
+        enemyScript.OnDeath += EnemyDied;
     }
 
+    // CUANDO MUERE UN ENEMIGO
     void EnemyDied()
     {
-        currentEnemies--;
+        currentEnemiesAlive--;
+
+        print("Enemigos restantes: " + currentEnemiesAlive);
+
+        // Si ya no quedan → siguiente ronda
+        if (currentEnemiesAlive <= 0)
+        {
+            currentRound++;
+            Invoke(nameof(StartRound), 2f); // espera 2 segundos
+        }
     }
 }
