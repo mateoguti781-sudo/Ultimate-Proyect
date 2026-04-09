@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 7573802315860891898}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.101, y: 0.29, z: 0}
+  m_LocalPosition: {x: -0.864, y: 1.741, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -141,7 +141,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82bf7578ba5fec04ba11cc87068e091d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 4014007858132162303, guid: 039e5aa544c739240bd25afb1d1f6965, type: 3}
   speed: 2
   detectionRange: 5
   attackCooldown: 1
@@ -164,10 +163,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  player: {fileID: 4014007858132162303, guid: 039e5aa544c739240bd25afb1d1f6965, type: 3}
   detectionDistance: 5
   attackPoint: {fileID: 8856693251929358390}
   sp: {fileID: 8848012559463328817}
+  groundCheck:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!61 &6746147249980633607
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -204,8 +205,8 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.65000004, y: -0.6296296}
-    oldSize: {x: 0.2, y: 0.27}
-    newSize: {x: 0.2, y: 0.27}
+    oldSize: {x: 1.25, y: 1.6875}
+    newSize: {x: 1.25, y: 1.6875}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
     adaptiveTiling: 0

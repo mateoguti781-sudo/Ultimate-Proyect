@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 8724591031104476144}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.101, y: 0.29, z: 0}
+  m_LocalPosition: {x: -0.91, y: 1.76, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -53,23 +53,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}
       propertyPath: m_LocalScale.x
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}
       propertyPath: m_LocalScale.y
-      value: 9.25
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}
       propertyPath: m_LocalScale.z
-      value: 10
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -1.6435442
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -2.19
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -145,7 +145,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82bf7578ba5fec04ba11cc87068e091d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 0}
   speed: 2
   detectionRange: 5
   attackCooldown: 1
@@ -168,13 +167,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  player: {fileID: 0}
-  detectionDistance: 5
+  detectionDistance: 20
   attackPoint: {fileID: 8378895742677434697}
   sp: {fileID: 3762916215622525865}
   groundCheck:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
 --- !u!50 &2780074810836831845
 Rigidbody2D:
   serializedVersion: 4
@@ -234,9 +232,9 @@ CircleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.02123394, y: 0.3436365}
+  m_Offset: {x: -0.1875, y: 1.90625}
   serializedVersion: 2
-  m_Radius: 0.09588983
+  m_Radius: 0.84375
 --- !u!4 &7726049117242625088 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7878350319992209165, guid: 901ef5bb51d92d14fa188e9bc94774e5, type: 3}

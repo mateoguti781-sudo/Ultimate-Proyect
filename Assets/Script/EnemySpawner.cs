@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
-    [Header("Configuración")]
+    [Header("Configuracion")]
     [SerializeField] GameObject enemyPrefab;
     [SerializeField] Transform[] spawnPoints;
 
@@ -22,7 +22,7 @@ public class EnemySpawner : MonoBehaviour
     // INICIAR RONDA
     public void StartRound()
     {
-        enemiesToSpawn = baseEnemies + currentRound; // cada ronda aumenta
+        enemiesToSpawn = baseEnemies + currentRound;
         currentEnemiesAlive = enemiesToSpawn;
 
         print("RONDA " + currentRound + " - Enemigos: " + enemiesToSpawn);
@@ -36,7 +36,7 @@ public class EnemySpawner : MonoBehaviour
         for (int i = 0; i < enemiesToSpawn; i++)
         {
             Spawn();
-            yield return new WaitForSeconds(0.5f); // pequeño delay entre enemigos
+            yield return new WaitForSeconds(0.5f);
         }
     }
 
@@ -46,7 +46,6 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemy = Instantiate(enemyPrefab, point.position, Quaternion.identity);
 
-        // SUSCRIBIRSE A LA MUERTE
         Enemy enemyScript = enemy.GetComponent<Enemy>();
         enemyScript.OnDeath += EnemyDied;
     }
